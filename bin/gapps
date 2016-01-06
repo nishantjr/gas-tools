@@ -38,6 +38,11 @@ program
   .action(require(commands + '/init'));
 
 program
+  .command('download')
+  .description('Download copy of current code for Apps Script project.')
+  .action(require(commands + '/download'))
+
+program
   .command('oauth-callback-url')
   .description('Get the OAuth Callback URL for a project')
   .action(require(commands + '/oauthCallbackUrl'));
