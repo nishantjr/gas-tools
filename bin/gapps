@@ -58,6 +58,7 @@ if (program.args.length == 0) {
     err = 'Bad command specified'
 }
 if (err) {
+    var p = require('process')
     console.log(err)
-    require('process').exit(2)
+    p.exit(2)
 }
