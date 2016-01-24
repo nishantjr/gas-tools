@@ -49,6 +49,7 @@
   "devDependencies": {
     "faucet": "0.0.1",
     "gulp": "^3.9.0",
+    "gulp-exclude-gitignore": "^1.0.0",
     "gulp-tape": "0.0.7",
     "tape": "^4.4.0"
   }

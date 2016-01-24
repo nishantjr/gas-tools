@@ -169,8 +169,10 @@ unit tests and functional tests. There are gulp targets to find and
 run the various kinds of tests, and the tests themselves use the [tape]
 framework.
 
-* Unit tests are in `*.jt` files anywhere in the repo; the build system
-will find these and execute them individually by running `node` on them.
+* Unit tests are in `*.jt` files anywhere in the repo (excepting
+  directories and files start with a dot and anything ignored by
+  `.gitignore`). The build system will find these and execute them
+  individually by running `node` on them.
 
 [tape]: https://www.npmjs.com/package/tape
 
