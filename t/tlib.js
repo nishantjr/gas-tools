@@ -3,11 +3,13 @@ const
     path        = require('path'),
     _           = require('lodash')
 
+function testName(test_module) {
+    return path.basename(test_module.filename, '.js').split('-')[0]
+}
+
 function testData(test_module, p) {
-    const
-        dir = path.dirname(test_module.filename),
-        subdir = path.basename(test_module.filename, '.js').split('-')[0]
-    return path.join(dir, subdir, p)
+    return path.join(
+        path.dirname(test_module.filename), testName(test_module), p)
 }
 
 function readTestData(p) {
@@ -17,6 +19,7 @@ function readTestData(p) {
 module.exports = (test_module) => { return {
     test:               require('tape'),
     spawn:              require('tape-spawn'),
+    testName:           _.partial(testName, test_module),
     testData:           _.partial(testData, test_module),
     readTestData:       readTestData,
 }}
