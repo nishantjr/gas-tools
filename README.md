@@ -162,6 +162,18 @@ Please submit any bugs to the Issues page. Pull Requests also welcome.
 
 If you want to develop, clone down the repo and have at it! You can run `npm link` from the root directory of the repo to symlink to your local copy. You'll have to uninstall the production version first `npm uninstall -g node-google-apps-script`.
 
+### Testing
+
+The test suite is still under construction, but does/will consist of
+unit tests and functional tests. There are gulp targets to find and
+run the various kinds of tests, and the tests themselves use the [tape]
+framework.
+
+* Unit tests are in `*.jt` files anywhere in the repo; the build system
+will find these and execute them individually by running `node` on them.
+
+[tape]: https://www.npmjs.com/package/tape
+
 ## Limitations
 
 `gapps` allows you to nest files in folders, but the Apps Script platform expects a flat file structure. Because of this, **no files can have the same name, even if they are in separate directories**. One file will overwrite the other, making debugging difficult.
