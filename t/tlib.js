@@ -16,10 +16,17 @@ function readTestData(p) {
     return fs.readFileSync(p, { encoding: 'UTF-8' })
 }
 
+function scratchFile(test_module, p) {
+    const args = [process.cwd(), '.build', 't', testName(test_module)]
+        .concat(Array.prototype.slice.call(arguments, 1))
+    return path.join.apply(undefined, args)
+}
+
 module.exports = (test_module) => { return {
     test:               require('tape'),
     spawn:              require('tape-spawn'),
     testName:           _.partial(testName, test_module),
     testData:           _.partial(testData, test_module),
     readTestData:       readTestData,
+    scratchFile:        _.partial(scratchFile, test_module)
 }}

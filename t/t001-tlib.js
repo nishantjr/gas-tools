@@ -11,3 +11,12 @@ tlib.test('readTestData', (t) => {
         tlib.readTestData(tlib.testData('expected')))
     t.end()
 })
+
+tlib.test('scratchFile', (t) => {
+    const path = require('path')
+    const expected = path.join('.build', 't', 't001', 'abc', 'def')
+    t.equal(
+        tlib.scratchFile('abc', 'def').substr(0 - expected.length),
+        expected)
+    t.end()
+})
