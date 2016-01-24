@@ -26,7 +26,7 @@ tlib.test('help', (t) => {
 
 tlib.test('no command fails', (t) => {
     const cmd = tlib.spawn(t, './bin/gapps')
-    cmd.stdout.match('No command specified\n')
+    cmd.stderr.match('No command specified\n')
     cmd.stdout.match(/Usage:/)
     if (tape_spawn_fixed)
         cmd.fails()
@@ -35,7 +35,7 @@ tlib.test('no command fails', (t) => {
 
 tlib.test('bad commands fail', (t) => {
     const cmd = tlib.spawn(t, './bin/gapps rubbish')
-    cmd.stdout.match('Bad command specified\n')
+    cmd.stderr.match('Bad command specified\n')
     cmd.stdout.match(/Usage:/)
     if (tape_spawn_fixed)
         cmd.fails()
