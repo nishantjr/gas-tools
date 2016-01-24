@@ -47,11 +47,17 @@ program
   .description('Get the OAuth Callback URL for a project')
   .action(require(commands + '/oauthCallbackUrl'));
 
-program
-  .parse(process.argv);
+program.parse(process.argv)
 
-if (program.args.length < 1 ) {
-  console.log('No command specified.');
-  program.outputHelp();
-  process.exit(2);
+var err
+if (program.args.length == 0) {
+    err = 'No command specified'
+} else if (program.args[program.args.length - 1] instanceof program.Command) {
+    err = undefined
+} else {
+    err = 'Bad command specified'
+}
+if (err) {
+    console.log(err)
+    require('process').exit(2)
 }
