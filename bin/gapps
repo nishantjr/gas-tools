@@ -60,5 +60,6 @@ if (program.args.length == 0) {
 if (err) {
     var p = require('process')
     console.log(err)
+    program.outputHelp()
     p.exit(2)
 }
