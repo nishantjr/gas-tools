@@ -18,14 +18,14 @@ const
 tlib.test('help', (t) => {
     const
         expected = require('../package.json').version + '\n',
-        cmd = tlib.spawn(t, './bin/gapps -V')
+        cmd = tlib.spawn(t, './bin/gas -V')
     cmd.succeeds()
     cmd.stdout.match(expected)
     cmd.end()
 })
 
 tlib.test('no command fails', (t) => {
-    const cmd = tlib.spawn(t, './bin/gapps')
+    const cmd = tlib.spawn(t, './bin/gas')
     cmd.stderr.match('No command specified\n')
     cmd.stdout.match(/Usage:/)
     if (tape_spawn_fixed)
@@ -34,7 +34,7 @@ tlib.test('no command fails', (t) => {
 })
 
 tlib.test('bad commands fail', (t) => {
-    const cmd = tlib.spawn(t, './bin/gapps rubbish')
+    const cmd = tlib.spawn(t, './bin/gas rubbish')
     cmd.stderr.match('Bad command specified\n')
     cmd.stdout.match(/Usage:/)
     if (tape_spawn_fixed)

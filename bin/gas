@@ -14,7 +14,7 @@ program
   .option('-b, --no-launch-browser',
     'Do not use a local webserver to capture oauth code and instead require copy/paste')
   .option('-p, --port [port]', 'Port to use for webserver')
-  .description('Authorize gapps to use the Google Drive API')
+  .description('Authorize gas to use the Google Drive API')
   .action(function(clientSecretPath, options) {
     require(commands + '/auth')(clientSecretPath, options.launchBrowser)
       .then(function() {

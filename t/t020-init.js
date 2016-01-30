@@ -7,7 +7,7 @@ tlib.test('pwd', (t) => {
     const docId = '1CodFWMEXI-5MfzNniEe8Uw8pSi82Iz0uU_jdbUvs2YpAIVmNqb-aH-Xg'
 
     const scratchDir = tlib.cleanScratchDir()
-    const cmd = tlib.spawn(t, '../../../bin/gapps init ' + docId,
+    const cmd = tlib.spawn(t, '../../../bin/gas init ' + docId,
         { cwd: scratchDir } )
     cmd.stdout.match('')
     cmd.end()
