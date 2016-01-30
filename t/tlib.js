@@ -1,6 +1,8 @@
 const
     fs          = require('fs'),
     path        = require('path'),
+    mkdirp      = require('mkdirp'),
+    rimraf      = require('rimraf'),
     _           = require('lodash')
 
 function testName(test_module) {
@@ -22,11 +24,19 @@ function scratchFile(test_module, p) {
     return path.join.apply(undefined, args)
 }
 
+function cleanScratchDir(test_module) {
+    scratchDir = scratchFile(test_module)
+    rimraf.sync(scratchDir)
+    mkdirp.sync(scratchDir)
+    return scratchDir
+}
+
 module.exports = (test_module) => { return {
     test:               require('tape'),
     spawn:              require('tape-spawn'),
     testName:           _.partial(testName, test_module),
     testData:           _.partial(testData, test_module),
     readTestData:       readTestData,
-    scratchFile:        _.partial(scratchFile, test_module)
+    scratchFile:        _.partial(scratchFile, test_module),
+    cleanScratchDir:    _.partial(cleanScratchDir, test_module),
 }}

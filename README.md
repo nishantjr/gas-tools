@@ -158,23 +158,46 @@ configured subdirectory.
 Returns the OAuth Callback URL required by most 3rd-party OAuth services.
 
 ## Development
+
+Ensure that both before and after you make any changes that all the
+tests run by `npm test` pass.
+
+If you want to use the command line tool in other projects, you can run
+`npm link` from the root directory of the repo to symlink to your local
+copy. If you already have another version installed, you can uninstall it
+first with `npm uninstall -g *package_name*`
+
 Please submit any bugs to the Issues page. Pull Requests also welcome.
 
-If you want to develop, clone down the repo and have at it! You can run `npm link` from the root directory of the repo to symlink to your local copy. You'll have to uninstall the production version first `npm uninstall -g node-google-apps-script`.
 
 ### Testing
 
-The test suite is still under construction, but does/will consist of
-unit tests and functional tests. There are gulp targets to find and
-run the various kinds of tests, and the tests themselves use the [tape]
-framework.
-
-* Unit tests are in `*.jt` files anywhere in the repo (excepting
-  directories and files start with a dot and anything ignored by
-  `.gitignore`). The build system will find these and execute them
-  individually by running `node` on them.
+The test suite is still under construction, but consists of unit tests and
+functional tests. There are gulp targets to find and run the various kinds
+of tests, and the tests themselves use the [tape] framework.
 
 [tape]: https://www.npmjs.com/package/tape
+
+#### Unit Tests
+
+Unit tests are in `*.jt` files anywhere in the repo (excepting directories
+and files that either start with a dot or are ignored by `.gitignore`). The
+build system will find these and execute them individually by running
+`node` on them.
+
+These tests should run without any special setup.
+
+
+#### Functional Tests
+
+Functional tests are under the `t/` subdirectory. While these can load and
+run JavaScript code just like the unit tests do, they typically go beyond
+this to run command-line programs, create and check files, access Google
+Drive via the REST API, and the like.
+
+To run them you will need to authenticate yourself to use the Google Drive
+API using the `gapps auth` subcommand.
+
 
 ## Limitations
 
