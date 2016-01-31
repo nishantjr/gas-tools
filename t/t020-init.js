@@ -2,14 +2,13 @@
 const tlib = require('./tlib')(module),
       fs   = require('fs')
 
+// GDrive publicly readable test file made available by <cjs@cynic.net>.
+// (In the long run we should probably create our own test files.)
 const docId = '1CodFWMEXI-5MfzNniEe8Uw8pSi82Iz0uU_jdbUvs2YpAIVmNqb-aH-Xg'
 
 tlib.cleanScratchDir()
 
 tlib.test('gas init', function(t) {
-    // GDrive publicly readable test file made available by <cjs@cynic.net>.
-    // (In the long run we should probably create our own test files.)
-
     const cmd = tlib.spawnInScratchDir(t, '../../../bin/gas init ' + docId)
     cmd.stdout.match('')
     cmd.end()
