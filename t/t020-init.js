@@ -11,14 +11,23 @@ tlib.test('gas init', (t) => {
     const scratchDir = tlib.cleanScratchDir()
     const cmd = bluebird.promisifyAll(
         tlib.spawn(t, '../../../bin/gas init ' + docId,
-        { cwd: scratchDir }))
-
+        { cwd: scratchDir, end: false }))
     cmd.stdout.match('')
 
     const firstLine =
         '// GAScode.gs from node-google-apps-script Public Test GAS Project'
     cmd.endAsync()
        .then(() => fs.readFileAsync(tlib.scratchFile('src/GAScode.js')))
-       .then((buffer) =>
-            t.equal(buffer.toString('utf8').split('\n')[0], firstLine))
+       .then((buffer) => buffer.toString('utf8').split('\n')[0] )
+       .then((actualFirstLine) => t.equal(firstLine, actualFirstLine))
+       .then(() => {
+            const cmd = bluebird.promisifyAll(
+                tlib.spawn(t, '../../../bin/gas init --overwrite' + docId,
+                { cwd: scratchDir, end: false }))
+            cmd.stdout.match('')
+            return cmd.endAsync()
+        })
+       .then(t.end)
+
+
 })
