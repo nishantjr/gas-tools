@@ -25,7 +25,27 @@ function spawnInScratchDir(t, cmd) {
 }
 
 tlib.test('gas init', function(t) {
-    const cmd = spawnInScratchDir(t, '../../../bin/gas init ' + docId)
+    const cmd = spawnInScratchDir(t,
+        '../../../bin/gas init first --subdir=first ' + docId)
     cmd.stdout.match('')
-    cmd.end(() => testProjectFirstLine(t, 'src/GAScode.js'))
+    cmd.stderr.match('')
+    cmd.succeeds()
+    cmd.end(() => testProjectFirstLine(t, 'first/GAScode.js'))
+})
+
+tlib.test('gas init: duplicate projectDescription fails', function(t) {
+    const cmd = spawnInScratchDir(t,
+        '../../../bin/gas init first --subdir=xxx ' + docId)
+        cmd.stderr.match(/first.*already exists/)
+    cmd.fails()
+    cmd.end()
+})
+
+tlib.test('gas init different subdir', function(t) {
+    const cmd = spawnInScratchDir(t,
+        '../../../bin/gas init second --subdir=second ' + docId)
+    cmd.stdout.match('')
+    cmd.stderr.match('')
+    cmd.succeeds()
+    cmd.end(() => testProjectFirstLine(t, 'second/GAScode.js'))
 })

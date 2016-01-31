@@ -29,7 +29,7 @@ program
   .action(require(commands + '/upload'));
 
 program
-  .command('init <fileId>')
+  .command('init <projectDescription> <fileId>')
   .option('-k, --key [key]')
   .option('-s, --subdir [subdir]')
   .option('-o, --overwrite')
