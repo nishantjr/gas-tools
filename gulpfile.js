@@ -6,7 +6,16 @@ const
     tape = require('gulp-tape'),
     faucet = require('faucet')
 
-gulp.task('test', ['unit-test', 'functional-test'])
+gulp.task('test', ['jshint', 'unit-test', 'functional-test'])
+
+gulp.task('jshint', () => {
+    const jshint = require('gulp-jshint')
+    return gulp
+        .src('t/**/*.j[st]')
+        .pipe(exclude_gitignore())
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+})
 
 gulp.task('unit-test', () => {
     return gulp

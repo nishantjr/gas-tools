@@ -1,3 +1,5 @@
+'use strict'
+
 const
     fs          = require('fs'),
     path        = require('path'),
@@ -25,7 +27,7 @@ function scratchFile(test_module, p) {
 }
 
 function cleanScratchDir(test_module) {
-    scratchDir = scratchFile(test_module)
+    const scratchDir = scratchFile(test_module)
     rimraf.sync(scratchDir)
     mkdirp.sync(scratchDir)
     return scratchDir
