@@ -15,8 +15,7 @@ tlib.test('no command fails', (t) => {
     const cmd = tlib.spawn(t, './bin/gas')
     cmd.stderr.match('No command specified\n')
     cmd.stdout.match(/Usage:/)
-    if (tlib.tape_spawn_fixed)
-        cmd.fails()
+    cmd.fails()
     cmd.end()
 })
 
@@ -24,7 +23,6 @@ tlib.test('bad commands fail', (t) => {
     const cmd = tlib.spawn(t, './bin/gas rubbish')
     cmd.stderr.match('Bad command specified\n')
     cmd.stdout.match(/Usage:/)
-    if (tlib.tape_spawn_fixed)
-        cmd.fails()
+    cmd.fails()
     cmd.end()
 })

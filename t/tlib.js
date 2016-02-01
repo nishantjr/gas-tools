@@ -7,19 +7,6 @@ const
     rimraf      = require('rimraf'),
     _           = require('lodash')
 
-/*
- * There's a bug in tape-spawn 1.4.0 that we trigger with a race condition:
- *   https://github.com/maxogden/tape-spawn/pull/12
- * The check for this bug that prevents cmd.fails() being called below when
- * we are using a tape-spawn known to have this bug can be removed when a
- * new version with the bugfix is released. Remember to update the required
- * version of tape-spawn in package.json when you remove this code.
- */
-const
-    semver = require('semver'),
-    tape_spawn_ver = require('tape-spawn/package.json').version,
-    tape_spawn_fixed = semver.gt(tape_spawn_ver, '1.4.0')
-
 function testName(test_module) {
     return path.basename(test_module.filename, '.js').split('-')[0]
 }
@@ -54,5 +41,4 @@ module.exports = (test_module) => { return {
     readTestData:       readTestData,
     scratchFile:        _.partial(scratchFile, test_module),
     cleanScratchDir:    _.partial(cleanScratchDir, test_module),
-    tape_spawn_fixed:   tape_spawn_fixed,
 }}
