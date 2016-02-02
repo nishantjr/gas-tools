@@ -5,6 +5,7 @@ const
     path        = require('path'),
     mkdirp      = require('mkdirp'),
     rimraf      = require('rimraf'),
+    spawn       = require('tape-spawn'),
     _           = require('lodash')
 
 function testName(test_module) {
@@ -33,12 +34,36 @@ function cleanScratchDir(test_module) {
     return scratchDir
 }
 
+function testProjectFirstLine(test_module, t, filePath)
+{
+    const firstLine =
+        '// GAScode.gs from node-google-apps-script Public Test GAS Project'
+    const fullPath = scratchFile(test_module, filePath)
+    t.assert(fs.existsSync(fullPath), "'" + fullPath + "' exists")
+    const buffer = fs.readFileSync(fullPath)
+    const actualFirstLine = buffer.toString('utf8').split('\n')[0]
+    t.equal(firstLine, actualFirstLine,
+        "'" + filePath + "' downloaded correctly")
+}
+
+function spawnInScratchDir(test_module, t, cmd) {
+    return spawn(t, cmd, { cwd: scratchFile(test_module) })
+}
+
+
 module.exports = (test_module) => { return {
     test:               require('tape'),
-    spawn:              require('tape-spawn'),
+    spawn:              spawn,
     testName:           _.partial(testName, test_module),
     testData:           _.partial(testData, test_module),
     readTestData:       readTestData,
     scratchFile:        _.partial(scratchFile, test_module),
     cleanScratchDir:    _.partial(cleanScratchDir, test_module),
+
+    // GDrive publicly readable test file made available by <cjs@cynic.net>.
+    // (In the long run we should probably create our own test files.)
+    testDocId: '1CodFWMEXI-5MfzNniEe8Uw8pSi82Iz0uU_jdbUvs2YpAIVmNqb-aH-Xg',
+
+    testProjectFirstLine: _.partial(testProjectFirstLine, test_module),
+    spawnInScratchDir:    _.partial(spawnInScratchDir, test_module),
 }}
