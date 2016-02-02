@@ -1,0 +1,19 @@
+'use strict'
+const test = require('tape'),
+      manifestor = require('./manifestor.js')
+
+test('config', t => {
+    const config = manifestor.emptyConfig()
+    config.addProject('first', 'fileIdXXX1234', 'path/to/project')
+    t.equal(config.getProject('first').description, 'first')
+    t.equal(config.getProject('first').fileId, 'fileIdXXX1234')
+    t.equal(config.getProject('first').path, 'path/to/project')
+
+    t.throws(
+        () => config.addProject('first', '1234', 'path/to/project2'),
+        /first.*already exists/)
+
+    t.end()
+})
+
+
