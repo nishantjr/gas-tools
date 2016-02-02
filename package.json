@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cjs-cynic-net/gas-tools.git"
+    "url": "https://github.com/cynic-net/gas-tools.git"
   },
   "bin": {
     "gas": "./bin/gas"
@@ -42,9 +42,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cjs-cynic-net/gas-tools/issues"
+    "url": "https://github.com/cynic-net/gas-tools/issues"
   },
-  "homepage": "https://github.com/cjs-cynic-net/gas-tools",
+  "homepage": "https://github.com/cynic-net/gas-tools",
   "dependencies": {
     "bluebird": "^2.9.30",
     "colors": "^1.0.3",
