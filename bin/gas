@@ -38,7 +38,7 @@ program
   .action(require(commands + '/init'));
 
 program
-  .command('download')
+  .command('download <projectDescription>')
   .description('Download copy of current code for Apps Script project.')
   .action(require(commands + '/download'))
 
