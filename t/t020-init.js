@@ -15,10 +15,10 @@ tlib.test('gas init', function(t) {
 })
 
 tlib.test('check init content', t => {
-    const firstLine =
+    const expected =
         '// GAScode.gs from node-google-apps-script Public Test GAS Project'
     const buffer = fs.readFileSync(tlib.scratchFile('src/GAScode.js'))
-    const actualFirstLine = buffer.toString('utf8').split('\n')[0]
-    t.equal(firstLine, actualFirstLine)
+    const lineOne = buffer.toString('utf8').split('\n')[0]
+    t.equal(lineOne, expected)
     t.end()
 })
