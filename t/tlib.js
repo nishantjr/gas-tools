@@ -5,8 +5,21 @@ const
     path        = require('path'),
     mkdirp      = require('mkdirp'),
     rimraf      = require('rimraf'),
+    tape        = require('tape'),
     spawn       = require('tape-spawn'),
     _           = require('lodash')
+
+
+tape.Test.prototype.match = function(actual, pattern, msg, extra) {
+    this._assert(actual.match(pattern), {
+        message: msg,
+        operator: 'match',
+        actual: actual,
+        expected: pattern,
+        extra: extra
+    })
+}
+
 
 function testName(test_module) {
     return path.basename(test_module.filename, '.js').split('-')[0]
@@ -40,7 +53,7 @@ function spawnInScratchDir(test_module, t, command) {
 
 
 module.exports = (test_module) => { return {
-    test:               require('tape'),
+    test:               tape,
     spawn:              spawn,
     testName:           _.partial(testName, test_module),
     testData:           _.partial(testData, test_module),
