@@ -5,6 +5,7 @@ const
     path        = require('path'),
     mkdirp      = require('mkdirp'),
     rimraf      = require('rimraf'),
+    spawn       = require('tape-spawn'),
     _           = require('lodash')
 
 function testName(test_module) {
@@ -33,12 +34,18 @@ function cleanScratchDir(test_module) {
     return scratchDir
 }
 
+function spawnInScratchDir(test_module, t, command) {
+    return spawn(t, command, { cwd: scratchFile(test_module) })
+}
+
+
 module.exports = (test_module) => { return {
     test:               require('tape'),
-    spawn:              require('tape-spawn'),
+    spawn:              spawn,
     testName:           _.partial(testName, test_module),
     testData:           _.partial(testData, test_module),
     readTestData:       readTestData,
     scratchFile:        _.partial(scratchFile, test_module),
     cleanScratchDir:    _.partial(cleanScratchDir, test_module),
+    spawnInScratchDir:  _.partial(spawnInScratchDir, test_module),
 }}
