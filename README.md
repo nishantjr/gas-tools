@@ -136,7 +136,6 @@ Performs the authentication flow described in the quickstart above.
   Initialize project locally. The external Apps Script project must exist.
 
   Options:
-    -k, --key [key]
     -s, --subdir [subdir]
     -o, --overwrite
 ```
@@ -153,17 +152,6 @@ Creates `gas-tools.json`, which contains information about your Apps Script proj
 
 Upload the project to Google Drive. Sources files from `./src` or the
 configured subdirectory.
-
-### gas oauth-callback-url
-
-```
-  Usage: gas oauth-callback-url
-
-  Get the OAuth Callback URL for a project
-```
-
-Returns the OAuth Callback URL required by most 3rd-party OAuth services.
-
 
 Development
 -----------
